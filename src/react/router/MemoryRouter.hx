@@ -1,0 +1,43 @@
+package react.router;
+
+import haxe.extern.EitherType;
+import react.ReactComponent;
+
+typedef MemoryRouterProps = {
+	/**
+		An array of locations in the history stack.
+	*/
+	var initialEntries:Array<EitherType<String, RouterLocation>>;
+
+	/**
+		The initial location’s index in the array of initialEntries.
+	*/
+	var initialIndex:Int;
+
+	/**
+		A function to use to confirm navigation. Defaults to using
+		window.confirm.
+	*/
+	var getUserConfirmation:String->(Bool->Void)->Void;
+
+	/**
+		The length of location.key. Defaults to 6.
+	*/
+	var keyLength:Int;
+
+	/**
+		A single child element to render.
+	*/
+	var children:ReactElement;
+}
+
+/**
+	A <Router> that keeps the history of your “URL” in memory (does not read or
+	write to the address bar). Useful in tests and non-browser environments like
+	React Native.
+
+	See https://reacttraining.com/react-router/web/api/MemoryRouter
+*/
+@:jsRequire('react-router', 'MemoryRouter')
+extern class MemoryRouter extends ReactComponentOfProps<MemoryRouterProps> {}
+
