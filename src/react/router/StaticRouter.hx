@@ -8,12 +8,12 @@ typedef StaticRouterProps = {
 		The base URL for all locations. A properly formatted basename should
 		have a leading slash, but no trailing slash.
 	*/
-	var basename:String;
+	@:optional var basename:String;
 
 	/**
 		The URL the server received, probably req.url on a node server.
 	*/
-	var location:EitherType<String, RouterLocation>;
+	@:optional var location:EitherType<String, RouterLocation>;
 
 	/**
 		During the render, components can add properties to the object to store

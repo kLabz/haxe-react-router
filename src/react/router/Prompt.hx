@@ -18,7 +18,7 @@ typedef PromptProps = {
 		always render it but pass when={true} or when={false} to prevent or
 		allow navigation accordingly.
 	*/
-	var when:Bool;
+	@:optional var when:Bool;
 }
 
 /**

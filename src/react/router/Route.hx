@@ -10,9 +10,10 @@ typedef RouteRenderProps = {
 }
 
 typedef RouteMatchProps = {
-	var path:String;
+	@:optional var path:String;
 	@:optional var exact:Bool;
 	@:optional var strict:Bool;
+	@:optional var sensitive:Bool;
 }
 
 typedef ChildrenRouteProps = {

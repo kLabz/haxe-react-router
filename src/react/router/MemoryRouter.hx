@@ -7,28 +7,28 @@ typedef MemoryRouterProps = {
 	/**
 		An array of locations in the history stack.
 	*/
-	var initialEntries:Array<EitherType<String, RouterLocation>>;
+	@:optional var initialEntries:Array<EitherType<String, RouterLocation>>;
 
 	/**
 		The initial location’s index in the array of initialEntries.
 	*/
-	var initialIndex:Int;
+	@:optional var initialIndex:Int;
 
 	/**
 		A function to use to confirm navigation. Defaults to using
 		window.confirm.
 	*/
-	var getUserConfirmation:String->(Bool->Void)->Void;
+	@:optional var getUserConfirmation:String->(Bool->Void)->Void;
 
 	/**
 		The length of location.key. Defaults to 6.
 	*/
-	var keyLength:Int;
+	@:optional var keyLength:Int;
 
 	/**
 		A single child element to render.
 	*/
-	var children:ReactElement;
+	@:optional var children:ReactElement;
 }
 
 /**

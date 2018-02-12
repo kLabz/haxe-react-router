@@ -9,24 +9,24 @@ typedef HashRouterProps = {
 		sub-directory. A properly formatted basename should have a leading
 		slash, but no trailing slash.
 	*/
-	var basename:String;
+	@:optional var basename:String;
 
 	/**
 		A function to use to confirm navigation. Defaults to using
 		window.confirm.
 	*/
-	var getUserConfirmation:String->(Bool->Void)->Void;
+	@:optional var getUserConfirmation:String->(Bool->Void)->Void;
 
 	/**
 		The type of encoding to use for window.location.hash.
 		Defaults to Slash.
 	*/
-	var hashType:HashType;
+	@:optional var hashType:HashType;
 
 	/**
 		A single child element to render.
 	*/
-	var children:ReactElement;
+	@:optional var children:ReactElement;
 }
 
 @:enum abstract HashType(String) from String to String {
