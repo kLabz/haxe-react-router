@@ -13,7 +13,7 @@ typedef LinkProps = {
 		When true, clicking the link will replace the current entry in the
 		history stack instead of adding a new one.
 	*/
-	var replace:Bool;
+	@:optional var replace:Bool;
 }
 
 /**

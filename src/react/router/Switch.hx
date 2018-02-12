@@ -7,7 +7,7 @@ typedef SwitchProps = {
 		A location object to be used for matching children elements instead of
 		the current history location (usually the current browser URL).
 	*/
-	var location:RouterLocation;
+	@:optional var location:RouterLocation;
 
 	/**
 		All children of a <Switch> should be <Route> or <Redirect> elements.

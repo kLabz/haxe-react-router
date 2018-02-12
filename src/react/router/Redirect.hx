@@ -20,6 +20,20 @@ typedef RedirectProps = {
 		when rendering a <Redirect> inside of a <Switch>.
 	*/
 	@:optional var from:String;
+
+	/**
+		When true, the active class/style will only be applied if the location
+		is matched exactly.
+	*/
+	@:optional var exact:Bool;
+
+	/**
+		When true, the trailing slash on a location’s pathname will be taken
+		into consideration when determining if the location matches the current
+		URL.
+		See the <Route strict> documentation for more information.
+	*/
+	@:optional var strict:Bool;
 }
 
 /**

@@ -4,9 +4,9 @@ import react.React.CreateElementType;
 import react.ReactComponent;
 
 typedef RouteRenderProps = {
-	var match:RouterMatch;
-	var location:RouterLocation;
-	var history:RouterHistory;
+	@:optional var match:RouterMatch;
+	@:optional var location:RouterLocation;
+	@:optional var history:RouterHistory;
 }
 
 typedef RouteMatchProps = {

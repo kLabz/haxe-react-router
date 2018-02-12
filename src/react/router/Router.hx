@@ -11,7 +11,7 @@ typedef RouterProps = {
 	/**
 		A single child element to render.
 	*/
-	var children:ReactElement;
+	@:optional var children:ReactElement;
 }
 
 /**
