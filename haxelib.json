@@ -1,8 +1,8 @@
 {
   "name": "react-router-4",
   "description": "Externs for react-router 4",
-  "version": "0.0.1",
-  "releasenote": "Initial release",
+  "version": "0.0.2",
+  "releasenote": "Updated props from react-router sources",
   "url": "https://github.com/kLabz/haxe-react-router",
   "license": "MIT",
   "tags": [
