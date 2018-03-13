@@ -29,11 +29,13 @@ private abstract BundledComponent(Class<ReactComponent>) to Class<ReactComponent
 	}
 }
 
-class Bundle extends ReactComponentOfPropsAndState<BundleProps, BundleState> {
+class Bundle extends ReactComponentOf<BundleProps, BundleState> {
 	static var defaultProps:Partial<BundleProps> = {
 		loaderComponent: Bundle.DefaultLoader,
 		errorComponent: Bundle.DefaultError
 	};
+
+	var available:Bool;
 
 	function new(props) {
 		super(props);
@@ -58,13 +60,21 @@ class Bundle extends ReactComponentOfPropsAndState<BundleProps, BundleState> {
 	}
 
 	override function componentWillMount() {
+		available = true;
 		load(props);
 	}
 
+	override function componentWillUnmount() {
+		available = false;
+	}
+
+	// TODO: handle @:jsxStatic somehow
 	function load(props:BundleProps) {
 		setState({module: null, error: false}, function() {
 			props.load
 				.then(function(mod:Dynamic) {
+					if (!available) return;
+
 					var def = untyped mod['default'];
 					var module:BundledComponent = def != null ? def : mod;
 
@@ -76,6 +86,8 @@ class Bundle extends ReactComponentOfPropsAndState<BundleProps, BundleState> {
 					setState({module: module, error: false});
 				})
 				.catchError(function(e:Dynamic) {
+					if (!available) return;
+
 					#if debug
 					js.Browser.console.error('Error loading module: $e');
 					#end

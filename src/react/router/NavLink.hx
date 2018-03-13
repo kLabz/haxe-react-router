@@ -53,5 +53,5 @@ typedef NavLinkProps = {
 	See https://reacttraining.com/react-router/web/api/NavLink
 */
 @:jsRequire('react-router-dom', 'NavLink')
-extern class NavLink extends ReactComponentOfProps<NavLinkProps> {}
+extern class NavLink<T:NavLinkProps> extends ReactComponentOfProps<T> {}
 

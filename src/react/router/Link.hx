@@ -24,13 +24,6 @@ typedef LinkProps = {
 
 	// Note: all props will also be passed to the <a> element via spread,
 	// so className, title, id and such are accepted too.
-	// This list is not exhaustive.
-	@:optional var id:String;
-	@:optional var className:String;
-	@:optional var target:String;
-	@:optional var title:String;
-	@:optional var style:Dynamic;
-	@:optional var onClick:haxe.Constraints.Function;
 }
 
 /**
@@ -38,5 +31,5 @@ typedef LinkProps = {
 	See https://reacttraining.com/react-router/web/api/Link
 */
 @:jsRequire('react-router-dom', 'Link')
-extern class Link extends ReactComponentOfProps<LinkProps> {}
+extern class Link<T:LinkProps> extends ReactComponentOfProps<T> {}
 

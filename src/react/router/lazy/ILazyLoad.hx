@@ -93,27 +93,33 @@ class LazyLoadMacro {
 				var ident = pack.concat([clsName]);
 
 				fields.push({
-					access: [APublic, AStatic, AInline],
+					access: [APublic, AStatic],
 					name: clsName,
-					kind: FFun({
-						args: [{
-							name: "props",
-							type: null,
-							value: null
-						}],
-						params: null,
-						ret: macro :react.ReactComponent.ReactElement,
-						expr: macro {
-							var load = Webpack.load($p{ident});
+					kind: FProp('get', 'never', macro :react.React.CreateElementType, null),
+					pos: Context.currentPos()
+				});
 
-							return react.React.createElement(
-								react.router.lazy.Bundle,
-								react.ReactUtil.copy(props, {
-									load: load,
-									loaderComponent: ${generateComponentExpr(loaderComponent)},
-									errorComponent: ${generateComponentExpr(errorComponent)}
-								})
-							);
+				fields.push({
+					access: [AStatic, AInline],
+					name: 'get_$clsName',
+					kind: FFun({
+						args: [],
+						params: null,
+						ret: macro :react.React.CreateElementType,
+						expr: macro {
+							return function(props) {
+								var a = $p{ident}; // Keep a reference so that modular does its job
+								var load = Webpack.load($p{ident});
+
+								return react.React.createElement(
+									react.router.lazy.Bundle,
+									react.ReactUtil.copy(props, {
+										load: load,
+										loaderComponent: ${generateComponentExpr(loaderComponent)},
+										errorComponent: ${generateComponentExpr(errorComponent)}
+									})
+								);
+							};
 						}
 					}),
 					pos: Context.currentPos()
