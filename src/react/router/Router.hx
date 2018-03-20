@@ -1,12 +1,13 @@
 package react.router;
 
+import history.History;
 import react.ReactComponent;
 
 typedef RouterProps = {
 	/**
 		A history object to use for navigation.
 	*/
-	var history:RouterHistory;
+	var history:History;
 
 	/**
 		A single child element to render.

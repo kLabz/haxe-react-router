@@ -1,6 +1,7 @@
 package react.router;
 
 import haxe.extern.EitherType;
+import history.Location;
 import js.html.HtmlElement;
 import react.ReactComponent;
 
@@ -8,7 +9,7 @@ typedef LinkProps = {
 	/**
 		The path or location to link to.
 	*/
-	var to:EitherType<String, RouterLocation>;
+	var to:EitherType<String, Location>;
 
 	/**
 		When true, clicking the link will replace the current entry in the

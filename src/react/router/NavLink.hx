@@ -1,5 +1,6 @@
 package react.router;
 
+import history.Location;
 import react.ReactComponent;
 import react.router.Link.LinkProps;
 
@@ -36,14 +37,14 @@ typedef NavLinkProps = {
 		active. This should be used if you want to do more than verify that the
 		link’s pathname matches the current URL’s pathname.
 	*/
-	@:optional var isActive:RouterMatch->RouterLocation->Bool;
+	@:optional var isActive:RouterMatch->Location->Bool;
 
 	/**
 		The isActive compares the current history location (usually the current
 		browser URL). To compare to a different location, a location can be
 		passed.
 	*/
-	@:optional var location:RouterLocation;
+	@:optional var location:Location;
 }
 
 /**

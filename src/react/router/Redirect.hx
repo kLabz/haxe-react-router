@@ -1,13 +1,14 @@
 package react.router;
 
 import haxe.extern.EitherType;
+import history.Location;
 import react.ReactComponent;
 
 typedef RedirectProps = {
 	/**
 		The URL/Location to redirect to.
 	*/
-	var to:EitherType<String, RouterLocation>;
+	var to:EitherType<String, Location>;
 
 	/**
 		When true, redirecting will push a new entry onto the history instead of

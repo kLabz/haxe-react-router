@@ -1,13 +1,14 @@
 package react.router;
 
 import haxe.extern.EitherType;
+import history.Location;
 import react.ReactComponent;
 
 typedef MemoryRouterProps = {
 	/**
 		An array of locations in the history stack.
 	*/
-	@:optional var initialEntries:Array<EitherType<String, RouterLocation>>;
+	@:optional var initialEntries:Array<EitherType<String, Location>>;
 
 	/**
 		The initial location’s index in the array of initialEntries.

@@ -1,6 +1,7 @@
 package react.router;
 
 import haxe.extern.EitherType;
+import history.Location;
 import react.ReactComponent;
 
 typedef StaticRouterProps = {
@@ -13,7 +14,7 @@ typedef StaticRouterProps = {
 	/**
 		The URL the server received, probably req.url on a node server.
 	*/
-	@:optional var location:EitherType<String, RouterLocation>;
+	@:optional var location:EitherType<String, Location>;
 
 	/**
 		During the render, components can add properties to the object to store

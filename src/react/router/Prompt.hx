@@ -1,6 +1,6 @@
 package react.router;
 
-import haxe.extern.EitherType;
+import history.TransitionManager.TPrompt;
 import react.ReactComponent;
 
 typedef PromptProps = {
@@ -11,7 +11,7 @@ typedef PromptProps = {
 		to navigate to. Return a string to show a prompt to the user or true to
 		allow the transition.
 	*/
-	var message:EitherType<String, RouterLocation->String>;
+	var message:TPrompt;
 
 	/**
 		Instead of conditionally rendering a <Prompt> behind a guard, you can

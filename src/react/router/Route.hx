@@ -1,12 +1,14 @@
 package react.router;
 
+import history.History;
+import history.Location;
 import react.React.CreateElementType;
 import react.ReactComponent;
 
 typedef RouteRenderProps = {
 	@:optional var match:RouterMatch;
-	@:optional var location:RouterLocation;
-	@:optional var history:RouterHistory;
+	@:optional var location:Location;
+	@:optional var history:History;
 }
 
 typedef RouteMatchProps = {
@@ -18,8 +20,8 @@ typedef RouteMatchProps = {
 
 typedef ChildrenRouteProps = {
 	var match:Null<RouterMatch>;
-	var location:RouterLocation;
-	var history:RouterHistory;
+	var location:Location;
+	var history:History;
 }
 
 typedef RouteComponentProps = {
