@@ -1,8 +1,8 @@
 {
   "name": "react-router-4",
   "description": "Externs for react-router 4",
-  "version": "0.0.3",
-  "releasenote": "Added dependency to history lib",
+  "version": "0.0.4",
+  "releasenote": "Added code splitting with haxe-loader",
   "url": "https://github.com/kLabz/haxe-react-router",
   "license": "MIT",
   "tags": [

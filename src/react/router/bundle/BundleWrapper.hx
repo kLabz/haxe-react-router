@@ -1,4 +1,4 @@
-package react.router.lazy;
+package react.router.bundle;
 
 import js.Promise;
 import react.Partial;
@@ -7,17 +7,18 @@ import react.ReactComponent;
 import react.ReactMacro.jsx;
 
 typedef BundleProps = {
-	var load:Promise<Dynamic>;
-	@:optional var loaderComponent:CreateElementType;
-	@:optional var errorComponent:CreateElementType;
+	var loader:Promise<Dynamic>;
+	@:optional var loading:CreateElementType;
+	@:optional var error:CreateElementType;
 }
 
 private typedef BundleState = {
-	var module:Null<Class<ReactComponent>>;
+	var module:Null<BundledComponent>;
 	var error:Bool;
+	var errorMessage:Null<Dynamic>;
 }
 
-private abstract BundledComponent(Class<ReactComponent>) to Class<ReactComponent> {
+private abstract BundledComponent(Class<ReactComponent>) {
 	public function firstLoad():Bool {
 		var firstLoad:Bool = untyped this.__alreadyLoaded == null;
 		untyped this.__alreadyLoaded = true;
@@ -27,12 +28,20 @@ private abstract BundledComponent(Class<ReactComponent>) to Class<ReactComponent
 	public function getOnLoad():Null<Void->Void> {
 		return untyped this.onLoad;
 	}
+
+	@:to
+	public function toCreateElementType():CreateElementType {
+		if (untyped this.__jsxStatic != null)
+			return untyped this.__jsxStatic;
+
+		return this;
+	}
 }
 
-class Bundle extends ReactComponentOf<BundleProps, BundleState> {
+class BundleWrapper extends ReactComponentOfPropsAndState<BundleProps, BundleState> {
 	static var defaultProps:Partial<BundleProps> = {
-		loaderComponent: Bundle.DefaultLoader,
-		errorComponent: Bundle.DefaultError
+		loading: DefaultLoader,
+		error: DefaultError
 	};
 
 	var available:Bool;
@@ -42,36 +51,40 @@ class Bundle extends ReactComponentOf<BundleProps, BundleState> {
 
 		this.state = {
 			module: null,
-			error: false
+			error: false,
+			errorMessage: null
 		}
 	}
 
 	override public function render() {
-		if (state.error) return React.createElement(props.errorComponent, {});
+		if (state.error)
+			return React.createElement(props.error, {error: state.errorMessage});
 
 		var moduleProps = {};
 		for (field in Reflect.fields(props))
-			if (field != "load")
-				Reflect.setField(moduleProps, field, Reflect.field(props, field));
+			switch (field) {
+				case "loader", "loading", "error":
+				default:
+					Reflect.setField(moduleProps, field, Reflect.field(props, field));
+			}
 
 		return state.module != null
 			? React.createElement(state.module, moduleProps)
-			: React.createElement(props.loaderComponent, {});
+			: React.createElement(props.loading, {});
 	}
 
 	override function componentWillMount() {
 		available = true;
-		load(props);
+		loadBundle(props);
 	}
 
 	override function componentWillUnmount() {
 		available = false;
 	}
 
-	// TODO: handle @:jsxStatic somehow
-	function load(props:BundleProps) {
+	function loadBundle(props:BundleProps) {
 		setState({module: null, error: false}, function() {
-			props.load
+			props.loader
 				.then(function(mod:Dynamic) {
 					if (!available) return;
 
@@ -83,7 +96,7 @@ class Bundle extends ReactComponentOf<BundleProps, BundleState> {
 						if (onLoad != null) return setState({module: module}, onLoad);
 					}
 
-					setState({module: module, error: false});
+					setState({module: module, error: false, errorMessage: null});
 				})
 				.catchError(function(e:Dynamic) {
 					if (!available) return;
@@ -92,7 +105,7 @@ class Bundle extends ReactComponentOf<BundleProps, BundleState> {
 					js.Browser.console.error('Error loading module: $e');
 					#end
 
-					setState({error: true});
+					setState({error: true, errorMessage: e});
 				});
 		});
 	}
