@@ -15,13 +15,13 @@ class Bundle {
 		?loaderComponent:Expr = null,
 		?errorComponent:Expr = null
 	):Expr {
-		classRef = Context.storeTypedExpr(Context.typeExpr(classRef));
+		classRef = storeExpr(classRef);
 
 		if (!isNull(loaderComponent))
-			loaderComponent = Context.storeTypedExpr(Context.typeExpr(loaderComponent));
+			loaderComponent = storeExpr(loaderComponent);
 
 		if (!isNull(errorComponent))
-			errorComponent = Context.storeTypedExpr(Context.typeExpr(errorComponent));
+			errorComponent = storeExpr(errorComponent);
 
 		return _load(classRef, loaderComponent, errorComponent);
 	}
@@ -29,7 +29,7 @@ class Bundle {
 	#if macro
 	static var N_LOADERS:Int = 0;
 
-	static function _load(
+	public static function _load(
 		classRef:Expr,
 		loaderComponent:Expr,
 		errorComponent:Expr
@@ -60,6 +60,15 @@ class Bundle {
 		});
 
 		return macro $p{loaderPack.concat([loaderName])}.render;
+	}
+
+	public static function storeExpr(expr:Expr):Expr {
+		try {
+			return Context.storeTypedExpr(Context.typeExpr(expr));
+		} catch (e:Error) {
+			Context.fatalError(e.message, e.pos);
+			return macro null;
+		}
 	}
 
 	static function isNull(e:Expr):Bool {

@@ -106,7 +106,7 @@ class LazyLoadMacro {
 
 	static function generateComponentExpr(componentType:Null<Expr>):Expr {
 		if (componentType == null) return macro null;
-		return Context.storeTypedExpr(Context.typeExpr(componentType));
+		return Bundle.storeExpr(componentType);
 	}
 }
 #end
