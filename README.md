@@ -103,11 +103,11 @@ class MainRouter extends ReactComponent {
 
 #### Usage with `@:jsxStatic` components
 
-You cannot directly load `@:jsxStatic` components (see [the `@:jsxStatic` original PR on haxe-react](https://github.com/massiveinteractive/haxe-react/pull/81))
-with current (1.4.0) haxe-react version.
+See [the `@:jsxStatic` original PR on haxe-react](https://github.com/massiveinteractive/haxe-react/pull/81) if you don't know about `@:jsxStatic` components.  Documentation will be added on `haxe-react` later.
 
-There is an ongoing [PR](https://github.com/massiveinteractive/haxe-react/pull/107) to make it work,
-which may end up being extracted as a standalone haxelib to avoid additional load on haxe-react.
+You cannot directly load `@:jsxStatic` components with current (`1.4.0`) haxe-react version.
+There is a merged [PR](https://github.com/massiveinteractive/haxe-react/pull/107) to make it work.
+This is not released at the moment, but until `1.4.1+` you can use git version of `haxe-react`.
 
 If you really need to, another workaround is to use a wrapper around your `@:jsxStatic` component:
 
@@ -115,7 +115,6 @@ If you really need to, another workaround is to use a wrapper around your `@:jsx
 
 // In your router
 jsx('
-    <!-- ... -->
     <$Route path="/bundle3" component=${Bundle.load(MyWrapper)} />
 ');
 
