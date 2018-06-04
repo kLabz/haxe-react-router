@@ -88,8 +88,11 @@ class BundleWrapper extends ReactComponentOfPropsAndState<BundleProps, BundleSta
 				.then(function(mod:Dynamic) {
 					if (!available) return;
 
-					var def = untyped mod['default'];
-					var module:BundledComponent = def != null ? def : mod;
+					var module:BundledComponent = mod;
+					while (mod != null) {
+						module = mod;
+						mod = untyped mod['default'];
+					}
 
 					if (module.firstLoad()) {
 						var onLoad:Void->Void = module.getOnLoad();
