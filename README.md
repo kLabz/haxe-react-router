@@ -83,6 +83,8 @@ class MainRouter extends ReactComponent {
                 <$Switch>
                     <!-- Using default loader component (`<div className="loader" />`) -->
                     <!-- and default error component (`<div className="error" />`) -->
+                    <!-- /!\\ Warning: your component should have the `@:expose("default")` meta -->
+                    <!-- See example below in "Bundle initialization code" -->
                     <$Route
                         path="/bundle1"
                         component=${Bundle.load(first.FirstBundle)}
