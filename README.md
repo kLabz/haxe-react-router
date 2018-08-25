@@ -144,6 +144,10 @@ You may want to execute some code when your bundle is first loaded.
 When your component is loaded via `Bundle.load(...)` (or `ILazyLoad`, see below), you can define
 initialization code to be executed at first load by creating an `onLoad` static method on your component:
 
+Adding `@:expose('default')` should be optional with version `0.0.7+`, but you
+should continue to add it, especially if you are using other libraries using
+split bundles.
+
 ```haxe
 import react.ReactComponent;
 import react.router.Route.RouteRenderProps;

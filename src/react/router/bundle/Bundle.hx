@@ -3,6 +3,8 @@ package react.router.bundle;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.macro.ExprTools;
+import haxe.macro.Type;
+import haxe.macro.TypeTools;
 
 #if (haxe_ver < 4)
 typedef ObjectField = {field:String, expr:Expr};
@@ -29,11 +31,17 @@ class Bundle {
 	#if macro
 	static var N_LOADERS:Int = 0;
 
+	public static function addHook() {
+		Context.onGenerate(onGenerate);
+	}
+
 	public static function _load(
 		classRef:Expr,
 		loaderComponent:Expr,
 		errorComponent:Expr
 	):Expr {
+		ensureExposed(classRef);
+
 		var props:Array<ObjectField> = [];
 		props.push({expr: macro Webpack.load($classRef), field: "loader"});
 		if (!isNull(loaderComponent)) props.push({expr: loaderComponent, field: "loading"});
@@ -73,6 +81,49 @@ class Bundle {
 
 	static function isNull(e:Expr):Bool {
 		return ExprTools.toString(e) == "null";
+	}
+
+	static var typesToExpose:Array<String>;
+
+	static function ensureExposed(classRef:Expr) {
+		var t = Context.typeof(classRef);
+
+		switch (t) {
+			case TType(_.get() => cls, _):
+				if (!cls.meta.has(':expose')) {
+					var tpath = cls.module;
+					if (tpath != null) {
+						if (typesToExpose == null) typesToExpose = [];
+						typesToExpose.push(tpath);
+					}
+				}
+
+			default:
+		}
+	}
+
+	public static function extractTPath(t:Type):Null<String> {
+		return switch(TypeTools.toComplexType(t)) {
+			case TPath(p):
+				var pack = p.pack;
+				pack.push(p.name);
+				if (p.sub != null) pack.push(p.sub);
+				pack.join('.');
+			default: null;
+		};
+	}
+
+	static function onGenerate(types:Array<Type>) {
+		if (typesToExpose == null) return;
+
+		for (t in types) {
+			var tpath = extractTPath(t);
+			if (Lambda.has(typesToExpose, tpath)) {
+				var cls = TypeTools.getClass(t);
+				cls.meta.add(':expose', [macro 'default'], cls.pos);
+				typesToExpose.remove(tpath);
+			}
+		}
 	}
 	#end
 	#end
