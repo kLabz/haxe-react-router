@@ -126,5 +126,7 @@ class Bundle {
 		}
 	}
 	#end
+	#else
+	public static function addHook() {}
 	#end
 }
