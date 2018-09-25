@@ -3,4 +3,5 @@ node_modules/
 .haxelib/
 .vim/
 .fzf/
+yarn.lock
 
