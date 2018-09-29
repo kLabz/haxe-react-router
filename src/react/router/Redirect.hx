@@ -7,6 +7,10 @@ import react.ReactComponent;
 typedef RedirectProps = {
 	/**
 		The URL/Location to redirect to.
+
+		When using `Location`, `pathname` can be any valid URL path that
+		[`path-to-regexp`](https://www.npmjs.com/package/path-to-regexp)
+		understands.
 	*/
 	var to:EitherType<String, Location>;
 
@@ -17,8 +21,16 @@ typedef RedirectProps = {
 	@:optional var push:Bool;
 
 	/**
-		A pathname to redirect from. This can only be used to match a location
-		when rendering a <Redirect> inside of a <Switch>.
+		A pathname to redirect from. Any valid URL path that
+		[`path-to-regexp`](https://www.npmjs.com/package/path-to-regexp)
+		understands.
+
+		All matched URL parameters are provided to the pattern in `to`.
+		Must contain all parameters that are used in `to`.
+		Additional parameters not used by `to` are ignored.
+
+		This can only be used to match a location when rendering a `<Redirect>`
+		inside of a `<Switch>`.
 	*/
 	@:optional var from:String;
 

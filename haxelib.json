@@ -1,8 +1,8 @@
 {
   "name": "react-router-4",
   "description": "Externs for react-router 4",
-  "version": "0.1.2",
-  "releasenote": "Link: accept more props with react-next meta",
+  "version": "0.2.0",
+  "releasenote": "Update for 4.3.0 - Updated Redirect and added generatePath()",
   "url": "https://github.com/kLabz/haxe-react-router",
   "license": "MIT",
   "tags": [

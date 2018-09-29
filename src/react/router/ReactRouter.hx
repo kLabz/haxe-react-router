@@ -1,5 +1,7 @@
 package react.router;
 
+import haxe.extern.EitherType;
+import history.Location;
 import react.router.Route.RouteMatchProps;
 import react.React.CreateElementType;
 
@@ -23,5 +25,13 @@ extern class ReactRouter {
 		See https://reacttraining.com/react-router/web/api/withRouter
 	*/
 	public static function withRouter(component:CreateElementType):CreateElementType;
+
+	/**
+		Generate a URL pathname from a pattern and parameters.
+
+		Added in react-router 4.3.0
+		https://github.com/ReactTraining/react-router/pull/5209/files#diff-eda9009f7d0179544cd0474e7ae68340
+	*/
+	public static function generatePath(?pattern:String, ?params:EitherType<String, Location>):String;
 }
 

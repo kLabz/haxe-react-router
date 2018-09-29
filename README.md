@@ -3,6 +3,10 @@
 A Haxe library offering externs for version 4 of the [react-router](https://github.com/ReactTraining/react-router) library.
 For version 3, see [haxe-react-router](https://github.com/elsassph/haxe-react-router) by [elsassph](https://github.com/elsassph).
 
+Compatibility with `react-router` javascript lib:
+* `0.1.X` => `4.2.X`
+* `0.2.X` => `4.3.X`
+
 ## Installation
 
 Using haxelib:
