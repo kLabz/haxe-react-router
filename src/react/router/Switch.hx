@@ -14,7 +14,11 @@ typedef SwitchProps = {
 		All children of a <Switch> should be <Route> or <Redirect> elements.
 		Only the first child to match the current location will be rendered.
 	*/
+	#if react_next
+	var children:ReactFragment;
+	#else
 	var children:Dynamic;
+	#end
 }
 
 /**

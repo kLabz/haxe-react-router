@@ -2,8 +2,13 @@ package react.router;
 
 import history.History;
 import history.Location;
-import react.React.CreateElementType;
 import react.ReactComponent;
+
+#if react_next
+import react.ReactNode;
+#else
+import react.React.CreateElementType;
+#end
 
 typedef RouteRenderProps = {
 	@:optional var match:RouterMatch;
@@ -27,9 +32,15 @@ typedef ChildrenRouteProps = {
 typedef RouteComponentProps = {
 	> RouteRenderProps,
 	> RouteMatchProps,
+	#if react_next
+	@:optional var component:ReactNode;
+	@:optional var render:RouteRenderProps->ReactFragment;
+	@:optional var children:ChildrenRouteProps->ReactFragment;
+	#else
 	@:optional var component:CreateElementType;
 	@:optional var render:RouteRenderProps->ReactElement;
 	@:optional var children:ChildrenRouteProps->ReactElement;
+	#end
 }
 
 /**

@@ -1,8 +1,8 @@
 {
   "name": "react-router-4",
   "description": "Externs for react-router 4",
-  "version": "0.2.0",
-  "releasenote": "Update for 4.3.0 - Updated Redirect and added generatePath()",
+  "version": "0.2.1",
+  "releasenote": "Update types for react-next (taking 4.4.0 beta into account)",
   "url": "https://github.com/kLabz/haxe-react-router",
   "license": "MIT",
   "tags": [

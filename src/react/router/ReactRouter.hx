@@ -3,7 +3,12 @@ package react.router;
 import haxe.extern.EitherType;
 import history.Location;
 import react.router.Route.RouteMatchProps;
+
+#if react_next
+import react.ReactNode;
+#else
 import react.React.CreateElementType;
+#end
 
 @:jsRequire('react-router')
 extern class ReactRouter {
@@ -24,7 +29,11 @@ extern class ReactRouter {
 
 		See https://reacttraining.com/react-router/web/api/withRouter
 	*/
+	#if react_next
+	public static function withRouter(component:ReactNode):ReactNode;
+	#else
 	public static function withRouter(component:CreateElementType):CreateElementType;
+	#end
 
 	/**
 		Generate a URL pathname from a pattern and parameters.

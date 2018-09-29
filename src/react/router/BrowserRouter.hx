@@ -30,9 +30,14 @@ typedef BrowserRouterProps = {
 	@:optional var keyLength:Int;
 
 	/**
-		A single child element to render.
+		If using `react` < 16 or `react-router` < 4.4.0, a single child element
+		to render.
 	*/
-	@:optional var children:ReactElement;
+	#if react_next
+	var children:ReactFragment;
+	#else
+	var children:ReactElement;
+	#end
 }
 
 /**
