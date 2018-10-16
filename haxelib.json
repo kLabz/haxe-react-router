@@ -1,7 +1,7 @@
 {
   "name": "react-router-4",
   "description": "Externs for react-router 4",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "releasenote": "Update types for react-next (taking 4.4.0 beta into account)",
   "url": "https://github.com/kLabz/haxe-react-router",
   "license": "MIT",

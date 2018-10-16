@@ -6,10 +6,14 @@ import react.React;
 import react.ReactComponent;
 import react.ReactMacro.jsx;
 
+#if (!react_next && (react < "2.0"))
+typedef ReactNode = CreateElementType;
+#end
+
 typedef BundleProps = {
 	var loader:Promise<Dynamic>;
-	@:optional var loading:CreateElementType;
-	@:optional var error:CreateElementType;
+	@:optional var loading:ReactNode;
+	@:optional var error:ReactNode;
 }
 
 private typedef BundleState = {
@@ -30,7 +34,7 @@ private abstract BundledComponent(Class<ReactComponent>) {
 	}
 
 	@:to
-	public function toCreateElementType():CreateElementType {
+	public function toReactNode():ReactNode {
 		if (untyped this.__jsxStatic != null)
 			return untyped this.__jsxStatic;
 

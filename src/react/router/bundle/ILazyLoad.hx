@@ -99,7 +99,11 @@ class LazyLoadMacro {
 		fields.push({
 			access: [APublic, AStatic],
 			name: clsName,
+			#if (!react_next && (react < "2.0"))
 			kind: FVar(macro :react.React.CreateElementType, loader),
+			#else
+			kind: FVar(macro :react.ReactNode, loader),
+			#end
 			pos: Context.currentPos()
 		});
 	}
