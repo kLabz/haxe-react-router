@@ -4,10 +4,10 @@ import haxe.extern.EitherType;
 import history.Location;
 import react.router.Route.RouteMatchProps;
 
-#if react_next
-import react.ReactNode;
-#else
-import react.React.CreateElementType;
+#if (!react_next && (react < "2.0"))
+private typedef ReactType = react.React.CreateElementType;
+#elseif (react_next && (react < "1.103"))
+private typedef ReactType = react.ReactNode;
 #end
 
 @:jsRequire('react-router')
@@ -29,11 +29,7 @@ extern class ReactRouter {
 
 		See https://reacttraining.com/react-router/web/api/withRouter
 	*/
-	#if react_next
-	public static function withRouter(component:ReactNode):ReactNode;
-	#else
-	public static function withRouter(component:CreateElementType):CreateElementType;
-	#end
+	public static function withRouter(component:ReactType):ReactType;
 
 	/**
 		Generate a URL pathname from a pattern and parameters.

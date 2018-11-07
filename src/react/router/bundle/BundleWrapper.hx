@@ -7,13 +7,15 @@ import react.ReactComponent;
 import react.ReactMacro.jsx;
 
 #if (!react_next && (react < "2.0"))
-typedef ReactNode = CreateElementType;
+private typedef ReactType = react.React.CreateElementType;
+#elseif (react_next && (react < "1.103"))
+private typedef ReactType = react.ReactNode;
 #end
 
 typedef BundleProps = {
 	var loader:Promise<Dynamic>;
-	@:optional var loading:ReactNode;
-	@:optional var error:ReactNode;
+	@:optional var loading:ReactType;
+	@:optional var error:ReactType;
 }
 
 private typedef BundleState = {
@@ -34,7 +36,7 @@ private abstract BundledComponent(Class<ReactComponent>) {
 	}
 
 	@:to
-	public function toReactNode():ReactNode {
+	public function toReactType():ReactType {
 		if (untyped this.__jsxStatic != null)
 			return untyped this.__jsxStatic;
 

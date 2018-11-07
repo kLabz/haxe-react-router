@@ -4,10 +4,10 @@ import history.History;
 import history.Location;
 import react.ReactComponent;
 
-#if react_next
-import react.ReactNode;
-#else
-import react.React.CreateElementType;
+#if (!react_next && (react < "2.0"))
+private typedef ReactType = react.React.CreateElementType;
+#elseif (react_next && (react < "1.103"))
+private typedef ReactType = react.ReactNode;
 #end
 
 typedef RouteRenderProps = {
@@ -32,12 +32,11 @@ typedef ChildrenRouteProps = {
 typedef RouteComponentProps = {
 	> RouteRenderProps,
 	> RouteMatchProps,
+	@:optional var component:ReactType;
 	#if react_next
-	@:optional var component:ReactNode;
 	@:optional var render:RouteRenderProps->ReactFragment;
 	@:optional var children:ChildrenRouteProps->ReactFragment;
 	#else
-	@:optional var component:CreateElementType;
 	@:optional var render:RouteRenderProps->ReactElement;
 	@:optional var children:ChildrenRouteProps->ReactElement;
 	#end
