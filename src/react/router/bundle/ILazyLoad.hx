@@ -99,8 +99,6 @@ class LazyLoadMacro {
 		var reactTypeCT =
 			#if (!react_next && (react < "2.0"))
 			macro :react.React.CreateElementType
-			#elseif (react_next && (react < "1.103"))
-			macro :react.ReactNode
 			#else
 			macro :react.ReactType
 			#end;
@@ -108,7 +106,7 @@ class LazyLoadMacro {
 		fields.push({
 			access: [APublic, AStatic],
 			name: clsName,
-			kind: FVar(macro :reactTypeCT, loader),
+			kind: FVar(macro :$reactTypeCT, loader),
 			pos: Context.currentPos()
 		});
 	}

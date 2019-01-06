@@ -1,8 +1,8 @@
 {
   "name": "react-router-4",
   "description": "Externs for react-router 4",
-  "version": "0.2.3",
-  "releasenote": "Update types for react-next (taking 4.4.0 beta into account)",
+  "version": "0.2.4",
+  "releasenote": "Fix macro for ILazyLoad",
   "url": "https://github.com/kLabz/haxe-react-router",
   "license": "MIT",
   "tags": [
