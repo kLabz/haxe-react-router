@@ -22,7 +22,11 @@ typedef LinkProps = {
 	*/
 	@:optional var innerRef:HtmlElement->Void;
 
+	#if react_next
 	@:optional var children:ReactFragment;
+	#else
+	@:optional var children:ReactElement;
+	#end
 }
 
 /**
