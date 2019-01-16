@@ -21,6 +21,8 @@ typedef LinkProps = {
 		Allows access to the underlying ref of the component.
 	*/
 	@:optional var innerRef:HtmlElement->Void;
+
+	@:optional var children:ReactFragment;
 }
 
 /**
