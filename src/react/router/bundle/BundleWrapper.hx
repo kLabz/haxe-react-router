@@ -8,8 +8,8 @@ import react.ReactMacro.jsx;
 
 #if (!react_next && (react < "2.0"))
 private typedef ReactType = react.React.CreateElementType;
-#elseif (react_next && (react < "1.103"))
-private typedef ReactType = react.ReactNode;
+#else
+import react.ReactType;
 #end
 
 typedef BundleProps = {
@@ -26,8 +26,8 @@ private typedef BundleState = {
 
 private abstract BundledComponent(Class<ReactComponent>) {
 	public function firstLoad():Bool {
-		var firstLoad:Bool = untyped this.__alreadyLoaded == null;
-		untyped this.__alreadyLoaded = true;
+		var firstLoad:Bool = untyped this.__loaded == null;
+		untyped this.__loaded = true;
 		return firstLoad;
 	}
 
@@ -110,20 +110,19 @@ class BundleWrapper extends ReactComponentOfPropsAndState<BundleProps, BundleSta
 				.catchError(function(e:Dynamic) {
 					if (!available) return;
 
-					#if debug
-					js.Browser.console.error('Error loading module: $e');
-					#end
+					js.Browser.console.error('Error loading module');
+					js.Browser.console.error(e);
 
 					setState({error: true, errorMessage: e});
 				});
 		});
 	}
 
-	static function DefaultLoader() {
+	public static function DefaultLoader() {
 		return jsx('<div className="loader"></div>');
 	}
 
-	static function DefaultError() {
+	public static function DefaultError() {
 		return jsx('<div className="error"></div>');
 	}
 }

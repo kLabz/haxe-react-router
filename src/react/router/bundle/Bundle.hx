@@ -127,6 +127,6 @@ class Bundle {
 	}
 	#end
 	#else
-	public static function addHook() {}
+	public static function addHook() throw('Bundle.addHook is only available in macro');
 	#end
 }

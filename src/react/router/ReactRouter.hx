@@ -6,8 +6,8 @@ import react.router.Route.RouteMatchProps;
 
 #if (!react_next && (react < "2.0"))
 private typedef ReactType = react.React.CreateElementType;
-#elseif (react_next && (react < "1.103"))
-private typedef ReactType = react.ReactNode;
+#else
+import react.ReactType;
 #end
 
 @:jsRequire('react-router')
