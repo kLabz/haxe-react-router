@@ -1,8 +1,8 @@
 {
   "name": "react-router-4",
   "description": "Externs for react-router 4",
-  "version": "0.2.5",
-  "releasenote": "Display errors in production mode too",
+  "version": "0.2.6",
+  "releasenote": "Fix usage without haxe-loader",
   "url": "https://github.com/kLabz/haxe-react-router",
   "license": "MIT",
   "tags": [
