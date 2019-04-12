@@ -29,7 +29,7 @@ class Bundle {
 	}
 
 	#if macro
-	static var N_LOADERS:Int = 0;
+	@:persistent static var N_LOADERS:Int = 0;
 
 	public static function addHook() {
 		Context.onGenerate(onGenerate);
@@ -61,7 +61,7 @@ class Bundle {
 				public static function render(props) {
 					return react.React.createElement(
 						react.router.bundle.BundleWrapper,
-						react.ReactUtil.copy(props, ${propsExpr})
+						js.Object.assign({}, props, ${propsExpr})
 					);
 				}
 			}).fields,
