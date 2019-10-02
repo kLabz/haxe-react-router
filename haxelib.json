@@ -1,8 +1,8 @@
 {
   "name": "react-router-4",
   "description": "Externs for react-router 4",
-  "version": "0.2.7",
-  "releasenote": "Fix usage without haxe-loader",
+  "version": "0.2.8",
+  "releasenote": "Update for deprecated react component lifecycle",
   "url": "https://github.com/kLabz/haxe-react-router",
   "license": "MIT",
   "tags": [

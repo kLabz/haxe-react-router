@@ -79,7 +79,7 @@ class BundleWrapper extends ReactComponentOfPropsAndState<BundleProps, BundleSta
 			: React.createElement(props.loading, {});
 	}
 
-	override function componentWillMount() {
+	override function componentDidMount() {
 		available = true;
 		loadBundle(props);
 	}

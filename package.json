@@ -1,6 +1,6 @@
 {
   "name": "haxe-react-router",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Haxe externs for react-router 4",
   "license": "MIT",
   "scripts": {},
