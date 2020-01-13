@@ -1,5 +1,6 @@
 package react.router;
 
+import haxe.extern.EitherType;
 import history.History;
 import history.Location;
 import react.ReactComponent;
@@ -35,10 +36,10 @@ typedef RouteComponentProps = {
 	@:optional var component:ReactType;
 	#if react_next
 	@:optional var render:RouteRenderProps->ReactFragment;
-	@:optional var children:ChildrenRouteProps->ReactFragment;
+	@:optional var children:EitherType<ChildrenRouteProps->ReactFragment, ReactFragment>;
 	#else
 	@:optional var render:RouteRenderProps->ReactElement;
-	@:optional var children:ChildrenRouteProps->ReactElement;
+	@:optional var children:EitherType<ChildrenRouteProps->ReactFragment, ReactElement>;
 	#end
 }
 
