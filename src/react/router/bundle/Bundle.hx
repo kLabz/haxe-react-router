@@ -41,9 +41,13 @@ class Bundle {
 		errorComponent:Expr
 	):Expr {
 		ensureExposed(classRef);
-
 		var props:Array<ObjectField> = [];
-		props.push({expr: macro Webpack.load($classRef), field: "loader"});
+
+		if (Context.defined('webpack.lite.enabled'))
+			props.push({expr: macro webpack.lite.Webpack.load($classRef), field: "loader"});
+		else
+			props.push({expr: macro Webpack.load($classRef), field: "loader"});
+
 		if (!isNull(loaderComponent)) props.push({expr: loaderComponent, field: "loading"});
 		if (!isNull(errorComponent)) props.push({expr: errorComponent, field: "error"});
 
